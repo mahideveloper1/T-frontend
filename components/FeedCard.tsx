@@ -5,8 +5,10 @@ import { FaRetweet } from 'react-icons/fa'
 import { AiOutlineHeart } from 'react-icons/ai'
 import Add from '../public/Add.jpg'
 
+
 // "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
 const FeedCard:React.FC = () => {
+ 
   
    
   
