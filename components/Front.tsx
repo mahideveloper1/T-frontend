@@ -120,8 +120,8 @@ const Front:React.FC = () => {
  </div>
 </div>
 {user&&   
-<div className=' absolute bottom-5 flex gap-2 items-center bg-slate-800 rounded-xl'>
-  {user &&user.profileImageUrl&&(<Image className=' rounded-full ' height={50} width={50}  alt="user-image"src={user?.profileImageUrl }/>)}
+<div className='px-3 py-2 font-serif  hover:bg-twitter-gray absolute  bottom-5  flex gap-2 items-center  rounded-full'>
+  {user &&user.profileImageUrl&&(<Image className=' rounded-full ' height={30} width={30}  alt="user-image"src={user?.profileImageUrl }/>)}
   <div>
     <h3 className=' text-xl'>
       {user.firstName} {user?.lastName}
