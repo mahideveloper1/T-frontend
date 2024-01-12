@@ -101,7 +101,7 @@ const Front:React.FC = () => {
 <BsTwitter  />
 
 </div>
-<div className=' mt-4  '>
+<div className=' mt-4  relative '>
  <ul>
    {SidebarMenuItems.map((items)=>(
  
@@ -119,6 +119,17 @@ const Front:React.FC = () => {
  <button className=' bg-[#1d9bf0]   py-3 rounded-full  w-full text-white text-lg text-bold'>Tweet</button>
  </div>
 </div>
+{user&&   
+<div className=' absolute bottom-5 flex gap-2 items-center bg-slate-800 rounded-xl'>
+  {user &&user.profileImageUrl&&(<Image className=' rounded-full ' height={50} width={50}  alt="user-image"src={user?.profileImageUrl }/>)}
+  <div>
+    <h3 className=' text-xl'>
+      {user.firstName} {user?.lastName}
+    </h3>
+  </div>
+
+</div> 
+}
 </div>
 <div className='col-span-5 overflow-scroll no-scrollbar border-r-[1px] border-l-[1px] border-twitter-border'>
         <FeedCard/>

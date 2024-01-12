@@ -4,7 +4,8 @@ const nextConfig = {
         remotePatterns:[
         {
          protocol:"https",
-        hostname:"w7.pngwing.com"
+        hostname:"w7.pngwing.com",
+        hostname:"lh3.googleusercontent.com"
 
         
     
