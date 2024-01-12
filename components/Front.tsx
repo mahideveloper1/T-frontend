@@ -32,6 +32,15 @@ const Front:React.FC = () => {
   const {user} = userCurrentUser();
   const queryClient = useQueryClient();
   
+
+
+
+
+
+
+
+
+
   
 
   interface  TwitterSideBitton
@@ -91,6 +100,10 @@ const Front:React.FC = () => {
       }
      
   },[queryClient])
+
+
+
+
   
   return (
     <div >
@@ -131,7 +144,43 @@ const Front:React.FC = () => {
 </div> 
 }
 </div>
-<div className='col-span-5 overflow-scroll no-scrollbar border-r-[1px] border-l-[1px] border-twitter-border'>
+
+
+
+
+
+
+
+
+<div className='   col-span-5  overflow-scroll no-scrollbar border-r-[1px] border-l-[1px] border-twitter-border'>
+
+
+  <div className=' fixed  bg-zinc-100  top-0  w-[30.5%]  grid grid-cols-2 '>
+
+    <div className='    border-b-2 border-black  pb-2  h-12  hover:bg-twitter-gray  flex items-center justify-center h-13 col-span-1' >
+      <span className='   text-sm   font-semibold  '>For you </span>
+      </div>
+    <div className='  h-12 flex items-center justify-center hover:bg-twitter-gray h-13 col-span-1'> 
+     <span className='  font-semibold  text-sm'>Following</span>
+    </div>
+    
+   
+
+  </div>
+  <div className= ' bg-white  h-12'>
+    
+   
+
+  </div>
+
+  
+
+  
+
+
+
+
+
         <FeedCard/>
         <FeedCard/>
         <FeedCard/>

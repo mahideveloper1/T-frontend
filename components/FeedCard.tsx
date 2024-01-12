@@ -30,18 +30,18 @@ const FeedCard:React.FC = () => {
 
           <div className='flex mt-2 items-center gap-[5em]'>
 
-     <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#CCE5F6]  hover:text-[#5FB7F2] transition-al' >
+     <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#CCE5F6]  hover:text-[#5FB7F2] transition-colors' >
 <BiMessageRounded  />
    </div>
 
-   <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#C6EBDF] hover:text-[#00BA7C] transition-al' >
+   <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#C6EBDF] hover:text-[#00BA7C] transition-colors' >
   <FaRetweet />
   
   </div>
-  <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#F8CBE0] hover:text-[#F91880] transition-al' >
+  <div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#F8CBE0] hover:text-[#F91880] transition-colors' >
     <AiOutlineHeart/>
 </div>
-<div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#CCE5F6] hover:text-[#1D9BF0] transition-al' >
+<div className='flex items-center  w-8 h-8 justify-center rounded-full hover:bg-[#CCE5F6] hover:text-[#1D9BF0]  transition-colors' >
   <BiUpload/>
 </div>
 
