@@ -1,5 +1,5 @@
 
-import React from 'react'
+import React,{useState,ChangeEvent} from 'react'
 
 
 
@@ -7,7 +7,7 @@ import React from 'react'
 import Image from 'next/image'
 import  { useCallback } from 'react'
 import {BsBookmark, BsEnvelope, BsTwitter} from "react-icons/bs"
-import {BiHomeCircle} from "react-icons/bi"
+import {BiHomeCircle, BiImage} from "react-icons/bi"
 import {BiHash,BiUser} from "react-icons/bi"
 import {BsBell} from "react-icons/bs"
 import FeedCard from '@/components/FeedCard'
@@ -29,20 +29,23 @@ import { userCurrentUser } from '@/hooks'
 // "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
 const Front:React.FC = () => {
 
+
+  // const [content, setContent] = useState<string>('Type here...');
+
+  // const handleChange = (e: React.FormEvent<HTMLDivElement>) => {
+  //   setContent(e.currentTarget.textContent || '');  };
+
   const {user} = userCurrentUser();
   const queryClient = useQueryClient();
+
+  const handleSelectImage = useCallback(()=>{
+    const input = document.createElement("input");
+    input.setAttribute("type","file")
+    input.setAttribute("accept","image/*");
+    input.click();
+
+  },[])
   
-
-
-
-
-
-
-
-
-
-  
-
   interface  TwitterSideBitton
   {
     tittle:string,
@@ -151,7 +154,7 @@ const Front:React.FC = () => {
 
 
 
-
+{/* main feed section */}
 <div className='   col-span-5  overflow-scroll no-scrollbar border-r-[1px] border-l-[1px] border-twitter-border'>
 
 
@@ -168,9 +171,77 @@ const Front:React.FC = () => {
 
   </div>
   <div className= ' bg-white  h-12'>
+  </div>
+
+
+
+  {/* TweetArea */}
+  {/* <div className='grid grid-cols-8' >
+    <div className=' gap-0  col-span-[8%] p-3 ml-0 '>
+    { user &&user.profileImageUrl&&(<Image className=' rounded-full ' height={37} width={37}  alt="user-image"src={user?.profileImageUrl }/>)}
+     
+
+    </div>
+    <div className='  mr-0 col-span-7 '>
+      <div  onInput={handleChange} contentEditable={true} style={{
+    border: 'none',
+    outline: 'none',
+    overflowWrap: 'break-word', // This allows the text to break onto the next line
+    wordWrap: 'break-word', // This is for IE support
+     // Set a maximum height to limit the expansion
+  }} className='m-0 p-3 w-[97%] whitespace-pre-wrap  resize-none border-b boder-slate-700 focus:outline-none' 
+  onBlur={() => {
+    if (content === '') {
+      setContent('Type here...');
+    }
+  }}
+  onFocus={() => {
+    if (content === 'Type here...') {
+      setContent('');
+    }
+  }}
+>
+{content==''?"":content }
+</div> */}
+
+ {/* <textarea
+      value={value}
+      onChange={handleChange}
+      rows={getRows(value)}
+      style={{
+        minHeight: `${minRows * 1.2}em`, // Adjust the minimum height
+        resize: 'none',
+        overflow: 'hidden',
+      }}
+      placeholder="Type here..." */}
+    {/* /> */}
+     {/* </div>
     
-   
 
+    
+  </div> */}
+
+<div className='border  p-4 pb-0 border-r-0 border-l-0 border-b-0 hover:bg-[#F7F7F7] translate-all cursor-pointer'>
+
+  <div className='grid grid-cols-12 gap-3'>
+    <div className='col-span-1'>
+      {user?.profileImageUrl&&(<Image className=' rounded-full ' height={50} width={50}  alt="user-image"src={user?.profileImageUrl } />)}
+
+    </div>
+    <div className='col-span-11  pb-2'>
+      <textarea  placeholder="What is Happening? "className='w-full bg-transparent text-xl px-3 border-b border-slate-700' rows={4}></textarea>
+
+
+    
+    <div className='mt-2 flex justify-between items-center'>
+      <BiImage  onClick={handleSelectImage} className='text-xl'/>
+      <button className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Tweet</button>
+
+    </div>
+    </div>
+
+
+  </div>
   </div>
 
   
@@ -194,6 +265,11 @@ const Front:React.FC = () => {
         <FeedCard/>
 
   </div>
+
+  {/* //// end  */}
+
+
+
  <div className='col-span-3 p-5 '>
 {!user&&
     <div className=' p-5 bg-[#F7F9F9] rounded-lg'>
