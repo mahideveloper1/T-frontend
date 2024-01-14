@@ -24,6 +24,8 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { userCurrentUser } from '@/hooks'
+import { useGetAllTweets } from '@/hooks/tweets'
+import { Tweet } from '@/gql/graphql'
 
 
 // "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
@@ -36,6 +38,9 @@ const Front:React.FC = () => {
   //   setContent(e.currentTarget.textContent || '');  };
 
   const {user} = userCurrentUser();
+  const {tweets=[]} =useGetAllTweets();
+
+
   const queryClient = useQueryClient();
 
   const handleSelectImage = useCallback(()=>{
@@ -250,19 +255,9 @@ const Front:React.FC = () => {
 
 
 
+      {tweets?.map(tweet=> tweet? <FeedCard key={tweet?.id}  data ={tweet as Tweet}/>:null)}
 
-
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
-        <FeedCard/>
+     
 
   </div>
 

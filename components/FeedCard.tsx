@@ -4,10 +4,16 @@ import { BiMessageRounded, BiUpload } from 'react-icons/bi'
 import { FaRetweet } from 'react-icons/fa'
 import { AiOutlineHeart } from 'react-icons/ai'
 import Add from '../public/Add.jpg'
+import { Tweet } from '@/gql/graphql'
+
+interface FeedCardProps{
+  data:Tweet
+}
 
 
 // "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
-const FeedCard:React.FC = () => {
+const FeedCard:React.FC<FeedCardProps> = (props) => {
+  const {data} = props
  
   
    
@@ -18,15 +24,15 @@ const FeedCard:React.FC = () => {
         <div className='  col-span-1 mr-2'>
           
         
-            <Image  className='rounded-full ' src ={Add} width={60}  alt="user-img"/>
+         { data.author?.profileImageUrl&&  <Image  className='rounded-full object-cover   ' src ={data.author.profileImageUrl} width={50}  height={50} alt="user-img"/>}
           
 
         </div>
-        <div className=' col-span-11'>
+        <div className=' col-span-11 '>
           <div className='w-full'>
-          <span className=' text-[0.92em] font-semibold font-sans'>Puneet Mehandiratta</span>
+          <span className=' text-[0.92em] font-semibold font-sans'>{data.author?.firstName} { data.author?.lastName}</span>
           </div>
-          <span className='text-[0.8em]'>Co-founder of Tiny w/ @_Sparling_. We own @Dribbble, @AeroPress and many other wonderful companies. Funding science and journalism at Tiny Foundation.</span>
+          <span className='text-[0.8em]'>{data.content}</span>
 
           <div className='flex mt-2 items-center gap-[5em]'>
 
