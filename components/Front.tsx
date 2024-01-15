@@ -24,7 +24,7 @@ import {
 } from '@tanstack/react-query'
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { userCurrentUser } from '@/hooks'
-import { useGetAllTweets } from '@/hooks/tweets'
+import { useCreateTweet, useGetAllTweets } from '@/hooks/tweets'
 import { Tweet } from '@/gql/graphql'
 
 
@@ -38,7 +38,10 @@ const Front:React.FC = () => {
   //   setContent(e.currentTarget.textContent || '');  };
 
   const {user} = userCurrentUser();
+  const {mutate} = useCreateTweet();
   const {tweets=[]} =useGetAllTweets();
+  const [content, setContent] = useState<string>('');
+
 
 
   const queryClient = useQueryClient();
@@ -84,6 +87,17 @@ const Front:React.FC = () => {
     }
 
   ]
+
+  const handleCreateTweet =useCallback(()=>{
+    mutate({
+      content,
+    })
+
+  },[content,mutate]);
+
+
+
+
   const handleLoginWithGoogle =useCallback(async(cred:CredentialResponse)=>{
     
    
@@ -234,13 +248,13 @@ const Front:React.FC = () => {
 
     </div>
     <div className='col-span-11  pb-2'>
-      <textarea  placeholder="What is Happening? "className='w-full bg-transparent text-xl px-3 border-b border-slate-700' rows={4}></textarea>
+      <textarea value={content}  onChange={e=> setContent(e.target.value)} placeholder="What is Happening? "className='w-full bg-transparent text-xl px-3 border-b border-slate-700' rows={4}></textarea>
 
 
     
     <div className='mt-2 flex justify-between items-center'>
       <BiImage  onClick={handleSelectImage} className='text-xl'/>
-      <button className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Tweet</button>
+      <button  onClick={handleCreateTweet}className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Tweet</button>
 
     </div>
     </div>
