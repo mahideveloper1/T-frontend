@@ -16,6 +16,10 @@ export const getCurrentUserQuery =graphql(`
       email
       profileImageUrl
       lastName
+      tweets{
+        id
+        content 
+      }
     }
   }
 `)

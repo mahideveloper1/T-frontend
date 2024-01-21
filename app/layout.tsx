@@ -1,3 +1,4 @@
+import TanStackProvider from '@/Provoider/TanStackProvider'
 import './globals.css'
 import { Inter } from 'next/font/google'
 
@@ -27,7 +28,12 @@ export default function RootLayout({
     <html lang="en">
       
       <body className={inter.className}>
-     {children}
+      <TanStackProvider>
+        <div>
+        {children}
+        </div>
+    
+     </TanStackProvider>
     
     
      </body>
