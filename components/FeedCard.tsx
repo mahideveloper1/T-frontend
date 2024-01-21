@@ -3,7 +3,6 @@ import Image from 'next/image'
 import { BiMessageRounded, BiUpload } from 'react-icons/bi'
 import { FaRetweet } from 'react-icons/fa'
 import { AiOutlineHeart } from 'react-icons/ai'
-import Add from '../public/Add.jpg'
 import { Tweet } from '@/gql/graphql'
 
 interface FeedCardProps{

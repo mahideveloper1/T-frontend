@@ -1,5 +1,5 @@
 import { userCurrentUser } from '@/hooks';
-import React,{ useCallback} from 'react'
+import React,{ useCallback, useMemo} from 'react'
 import { BiHash, BiHomeCircle, BiUser } from 'react-icons/bi';
 import { BsBell, BsBookmark, BsEnvelope, BsTwitter } from 'react-icons/bs';
 import Image from 'next/image'
@@ -8,9 +8,17 @@ import { verifyUserGoogleToken } from '@/graphql/query/user';
 import { graphqlClient } from '@/clients/api';
 import { useQueryClient,} from '@tanstack/react-query'
 import  toast from 'react-hot-toast';
+import Link from 'next/link';
 
 interface TwitterlayoutProps{
     children : React.ReactNode;
+}
+   
+interface  TwitterSideBitton
+{
+  tittle:string,
+  icon:React.ReactNode
+  link:string
 }
 
 const Twitterlayout: React.FC <TwitterlayoutProps>=(props)=>{
@@ -23,40 +31,41 @@ const Twitterlayout: React.FC <TwitterlayoutProps>=(props)=>{
 
 
 
-    
-    interface  TwitterSideBitton
-    {
-      tittle:string,
-      icon:React.ReactNode
-    }
-    const SidebarMenuItems: TwitterSideBitton[]=[
+ 
+    const SidebarMenuItems: TwitterSideBitton[]= useMemo(()=>[
       {
       tittle:"Home",
-      icon:<BiHomeCircle/>
+      icon:<BiHomeCircle/>,
+      link:'/'
       },
       {
         tittle:"Explore",
-        icon:<BiHash/>
+        icon:<BiHash/>,
+        link:'/'
       },
       
       {
         tittle:"Notifications",
-        icon:<BsBell/>
+        icon:<BsBell/>,
+        link:'/'
       },
       {
         tittle:"Mesaages",
-        icon:<BsEnvelope/>
+        icon:<BsEnvelope/>,
+        link:'/'
       },
       {
         tittle:"Bookmarks",
-        icon:<BsBookmark/>
+        icon:<BsBookmark/>,
+        link:'/'
       },
       {
         tittle:"Profile",
-        icon:<BiUser/>
+        icon:<BiUser/>,
+        link:`/profile/${user?.id}`
       }
   
-    ]
+    ],[user?.id])
 
 
 
@@ -115,9 +124,12 @@ return <div>
  <ul>
    {SidebarMenuItems.map((items)=>(
  
-     <li className='flex font-serif  items-center gap-3 hover:bg-twitter-gray rounded-full px-3 py-2 w-fit cursor-pointer mt-2'>
-       <span className='text-[1.3em]' >{items.icon}</span>
+     <li key={items.tittle} >
+      <Link className='flex font-serif  items-center gap-3 hover:bg-twitter-gray rounded-full px-3 py-2 w-fit cursor-pointer mt-2'href={items.link}>
+      <span className='text-[1.3em]' >{items.icon}</span>
        <span  className='text-[1.3em]'>{items.tittle}</span>
+      </Link>
+       
    
      </li>
      

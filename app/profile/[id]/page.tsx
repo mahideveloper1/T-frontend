@@ -1,6 +1,8 @@
 "use client"
 
+import FeedCard from "@/components/FeedCard";
 import Twitterlayout from "@/components/Layout/TwitterLayout"
+import { Tweet } from "@/gql/graphql";
 import { userCurrentUser } from "@/hooks";
 
 import { BsArrowLeftShort } from "react-icons/bs"
@@ -46,12 +48,15 @@ const Profile=()=>{
 
 <div className="mt-8">
   <h3 className="text-xl  mb- font-bold ">Posts</h3>
-  <div className="border-b border-gray-300 mb-4">
-  </div>
+ 
 
-  
+
+ 
  
 </div>
+{user?.tweets?.map((tweet)=>
+  <FeedCard key={tweet?.id}  data ={tweet as Tweet}/>
+  )}
 </div>
         </div>
 
