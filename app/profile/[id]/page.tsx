@@ -1,14 +1,48 @@
 "use client"
+import { type NextRequest } from 'next/server'
 
+import { graphqlClient } from "@/clients/api";
 import FeedCard from "@/components/FeedCard";
 import Twitterlayout from "@/components/Layout/TwitterLayout"
-import { Tweet } from "@/gql/graphql";
+import { Tweet, User } from "@/gql/graphql";
+import { getUserByIdQuery } from "@/graphql/query/user";
 import { userCurrentUser } from "@/hooks";
+import { Query } from "@tanstack/react-query";
+import { GetServerSideProps, NextPage, NextPageContext } from "next";
+import { useRouter } from "next/router";
 
 import { BsArrowLeftShort } from "react-icons/bs"
+import { useEffect, useState } from 'react';
+
+
   
-const Profile=()=>{
+export default  function Profile({params,searchParamas}:any){
   const {user} = userCurrentUser();
+  // const data = GetUser(params.id)
+  // console.log(data);
+  const [userData, setUserData] = useState<User>();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await GetUser(params.id);
+        if (data === "notFound") {
+          console.log("User not found");
+        } else {
+          setUserData(data.getUserById as User);
+        }
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchData();
+  }, [params.id]);
+
+console.log(userData);
+  
+ 
+
 
 
     return(
@@ -70,9 +104,11 @@ const Profile=()=>{
     )
 
 }
-export default Profile;
+async  function GetUser(id :string){
+  if (!id) return "notFound"
+  const res = await graphqlClient.request(getUserByIdQuery, {id} );
+  if (!res?.getUserById) return "notFound";
+  return  res;
 
 
-
-
-
+}
