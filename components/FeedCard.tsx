@@ -4,6 +4,7 @@ import { BiMessageRounded, BiUpload } from 'react-icons/bi'
 import { FaRetweet } from 'react-icons/fa'
 import { AiOutlineHeart } from 'react-icons/ai'
 import { Tweet } from '@/gql/graphql'
+import Link from 'next/link'
 
 interface FeedCardProps{
   data:Tweet
@@ -29,7 +30,7 @@ const FeedCard:React.FC<FeedCardProps> = (props) => {
         </div>
         <div className=' col-span-11 '>
           <div className='w-full'>
-          <span className=' text-[0.92em] font-semibold font-sans'>{data.author?.firstName} { data.author?.lastName}</span>
+          <Link  href ={`/profile/${data.author?.id}`}className=' text-[0.92em] font-semibold font-sans'>{data.author?.firstName} { data.author?.lastName}</Link>
           </div>
           <span className='text-[0.8em]'>{data.content}</span>
 
