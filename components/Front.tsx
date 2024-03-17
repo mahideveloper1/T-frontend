@@ -7,18 +7,57 @@ import { userCurrentUser } from '@/hooks'
 import { useCreateTweet, useGetAllTweets } from '@/hooks/tweets'
 import { Tweet } from '@/gql/graphql'
 import Twitterlayout from './Layout/TwitterLayout'
+import { graphqlClient } from '@/clients/api'
+import { getSignedURLForTweetQuery } from '@/graphql/query/tweet'
+import { get } from 'http'
+import axios from 'axios'
+import toast from 'react-hot-toast'
 
 
 // "https://w7.pngwing.com/pngs/340/946/png-transparent-avatar-user-computer-icons-software-developer-avatar-child-face-heroes.png"
 const Front:React.FC = () => {
+  
 
 
 
 
   const {user} = userCurrentUser();
-  const {mutate} = useCreateTweet();
+  const {mutateAsync} = useCreateTweet();
   const {tweets=[]} =useGetAllTweets();
   const [content, setContent] = useState<string>('');
+  const [imageUrl, setImageUrl] = useState<string>('');
+
+
+  const handleInputChangeFile = useCallback((input:HTMLInputElement)=>{
+    return async (event:Event)=>{
+      event?.preventDefault();
+      
+      const file: File |null|undefined = input.files?.item(0);
+      console.log(file?.type);
+      if(!file) return;
+      
+      const {getSignedURLForTweet}= await graphqlClient.request(getSignedURLForTweetQuery,{
+        imageName:file.name,
+        imageType:'png'
+
+      })
+      console.log(getSignedURLForTweet);
+      if(getSignedURLForTweet){
+        toast.loading('Uploading',{id:'2'})
+         await axios.put(getSignedURLForTweet,file,{
+          headers:{'Content-Type':file.type}
+         })
+         toast.success('Upload Completed',{id:'2'})
+         const url = new URL(getSignedURLForTweet);
+         const myFilePath =`${url.origin}${url.pathname}`
+         setImageUrl(myFilePath);
+
+      }
+
+
+    }
+
+  },[])
 
 
 
@@ -28,18 +67,29 @@ const Front:React.FC = () => {
     const input = document.createElement("input");
     input.setAttribute("type","file")
     input.setAttribute("accept","image/*");
+    const handlerFn = handleInputChangeFile(input);
+    input.addEventListener("change",handlerFn)
     input.click();
 
-  },[])
+  },[handleInputChangeFile])
   
  
 
-  const handleCreateTweet =useCallback(()=>{
-    mutate({
+  const handleCreateTweet =useCallback( async()=>{
+    await mutateAsync({
+      imageUrl,
       content,
+     
+      
     })
+   
+      setContent('');
+      setImageUrl('');
+   
+   
 
-  },[content,mutate]);
+
+  },[content,mutateAsync,imageUrl]);
 
 
 
@@ -76,7 +126,7 @@ const Front:React.FC = () => {
 </div>
 <div className='col-span-11  pb-2'>
   <textarea value={content}  onChange={e=> setContent(e.target.value)} placeholder="What is Happening? "className='w-full bg-transparent text-xl px-3 border-b border-slate-700' rows={4}></textarea>
-
+{imageUrl&&<Image src={imageUrl} alt="image" width={300} height={300}/>}
 
 
 <div className='mt-2 flex justify-between items-center'>

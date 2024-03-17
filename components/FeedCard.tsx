@@ -33,6 +33,7 @@ const FeedCard:React.FC<FeedCardProps> = (props) => {
           <Link  href ={`/profile/${data.author?.id}`}className=' text-[0.92em] font-semibold font-sans'>{data.author?.firstName} { data.author?.lastName}</Link>
           </div>
           <span className='text-[0.8em]'>{data.content}</span>
+          {data?.imageUrl && <Image  src ={data.imageUrl} width={400}  height={400} alt="user-img"/>}
 
           <div className='flex mt-2 items-center gap-[5em]'>
 

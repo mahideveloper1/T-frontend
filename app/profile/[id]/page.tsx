@@ -7,20 +7,35 @@ import Twitterlayout from "@/components/Layout/TwitterLayout"
 import { Tweet, User } from "@/gql/graphql";
 import { getUserByIdQuery } from "@/graphql/query/user";
 import { userCurrentUser } from "@/hooks";
-import { Query } from "@tanstack/react-query";
+import { Query, useQueryClient } from "@tanstack/react-query";
 import { GetServerSideProps, NextPage, NextPageContext } from "next";
 import { useRouter } from "next/router";
 
 import { BsArrowLeftShort } from "react-icons/bs"
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
+import { UnfollowUserMutation, followUserMutation } from '@/graphql/mutation/user';
 
 
   
 export default  function Profile({params,searchParamas}:any){
   const {user} = userCurrentUser();
+  const queryClient = useQueryClient();
   // const data = GetUser(params.id)
   // console.log(data);
   const [userData, setUserData] = useState<User>();
+ 
+  const handleFollowerUser = useCallback(async()=>{
+    if(!userData) return;
+    await graphqlClient.request(followUserMutation,{to:userData?.id})
+    queryClient.invalidateQueries({ queryKey: ['current-user'] });
+
+  },[userData?.id,queryClient])
+  const handleUnFollowUser =useCallback(async()=>{
+    if(!userData) return;
+    await graphqlClient.request(UnfollowUserMutation,{to:userData?.id})
+    queryClient.invalidateQueries({ queryKey: ['current-user'] });
+
+  },[userData?.id,queryClient])
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,7 +54,14 @@ export default  function Profile({params,searchParamas}:any){
     fetchData();
   }, [params.id]);
 
-console.log(userData);
+  const amIFollowing = useMemo(()=>{
+    if(!userData) return false
+    return(
+      (user?.following?.findIndex((el)=>el?.id===userData?.id)??-1)<0
+    )
+    
+  },[user?.following,userData?.id])
+
   
  
 
@@ -77,11 +99,25 @@ console.log(userData);
     <h2 className="font-bold text-xl">{userData?.firstName}</h2>
     <p className="text-gray-500">@{userData?.id}</p>
     <p className="text-gray-700">Your bio goes here...</p>
+    <div className=' flex   mt-1 p-1 gap-1 text-gray-500 '>
+  <span>{userData?.followers?.length} followers</span>
+  <span>{userData?.following?.length} following</span>
+
+    </div>
+    {
+      user?.id!=userData?.id&& (<>
+      {amIFollowing?(<button  onClick={handleFollowerUser} className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Follow</button>):<button  onClick={handleUnFollowUser} className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Unfollow</button>}
+      </>)   
+
+    }
+
+    
   </div>
 </div>
 
 
-<div className="mt-8">
+
+<div className="mt-2">
   <h3 className="text-xl  mb- font-bold ">Posts</h3>
  
 
