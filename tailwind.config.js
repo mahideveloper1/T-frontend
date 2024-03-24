@@ -8,6 +8,18 @@ module.exports = {
   
   theme: {
     extend: {
+      screens: {
+        'vs': '156px',
+      
+       
+  
+        'laptop': '1024px',
+        
+  
+       
+        
+      },
+      
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':

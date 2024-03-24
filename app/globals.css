@@ -6,7 +6,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Titillium+Web&display=swap');
 
 body{
-  overflow: hidden;
+  overflow: scroll;
   scroll-behavior: smooth;
 }
 @layer utilities {
