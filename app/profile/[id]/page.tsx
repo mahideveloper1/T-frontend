@@ -69,6 +69,7 @@ export default  function Profile({params,searchParamas}:any){
 
     return(
      
+     
         <Twitterlayout>
           
           <div>
@@ -138,7 +139,7 @@ export default  function Profile({params,searchParamas}:any){
     
 
          
-    )
+   )
 
 }
 async  function GetUser(id :string){

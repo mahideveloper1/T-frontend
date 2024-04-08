@@ -1,4 +1,4 @@
-"use client"
+
 import React, { ReactNode } from 'react'
 import Front from '@/components/Front'
 import LeftSideBar from '@/components/LeftSideBar';

@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react'
 import Image from 'next/image'
 import  { useCallback } from 'react'
@@ -131,7 +132,7 @@ const Front:React.FC = () => {
 
 <div className='mt-2 flex justify-between items-center'>
   <BiImage  onClick={handleSelectImage} className='text-xl'/>
-  <button  onClick={handleCreateTweet}className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Tweet</button>
+  <button  onClick={handleCreateTweet} className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Tweet</button>
 
 </div>
 </div>

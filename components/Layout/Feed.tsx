@@ -5,6 +5,7 @@ import { BiMessageRounded, BiUpload } from 'react-icons/bi';
 import {  BsThreeDots } from 'react-icons/bs';
 import { FaRetweet } from 'react-icons/fa';
 import Image from 'next/image'
+import Link from 'next/link';
 
 
 interface FeedCardProps{
@@ -31,10 +32,12 @@ const Feed :React.FC<FeedCardProps> = (props) => {
       <div className="flex flex-col flex-grow">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-1 w-full">
+          <Link  href ={`/user/${data.author?.id}`}>
             <div className="font-bold">
               {/* User Name */}
               {data.author?.firstName} { data.author?.lastName}
             </div>
+            </Link>
             <div className="text-gray-500">@.</div>
             <div className="text-gray-500">
               {/* Times 3s ago */}
@@ -53,7 +56,7 @@ const Feed :React.FC<FeedCardProps> = (props) => {
         {data?.imageUrl && <Image  src ={data.imageUrl} width={550}  height={20} alt="user-img"/>}
 
         </div>
-        <div className="flex items-center justify-start space-x-4 mt-2 w-full">
+        <div className="flex items-center justify-evenly  mt-2 w-full">
           <div className="rounded-full hover:bg-white/10 transition duration-200 p-3 cursor-pointer">
             <BiMessageRounded />
           </div>
@@ -62,6 +65,9 @@ const Feed :React.FC<FeedCardProps> = (props) => {
           </div>
           <div className="rounded-full hover:bg-white/10 transition duration-200 p-3 cursor-pointer">
             <AiOutlineHeart />
+          </div>
+          <div className="rounded-full hover:bg-white/10 transition duration-200 p-3 cursor-pointer">
+            <BiUpload />
           </div>
           <div className="rounded-full hover:bg-white/10 transition duration-200 p-3 cursor-pointer">
             <BiUpload />

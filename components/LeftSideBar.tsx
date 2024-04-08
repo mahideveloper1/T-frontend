@@ -56,11 +56,7 @@ interface  TwitterSideBitton
         icon:<BsBookmark/>,
         link:'/'
       },
-    //   {
-    //     tittle:"Profile",
-    //     icon:<BiUser/>,
-    //     link:`/profile/${user?.id}`
-    //   }
+   
     {
         tittle:"Profile",
         icon:<BiUser/>,
@@ -94,10 +90,10 @@ const LeftSideBar = () => {
       {item.tittle !== "Twitter" && <div  className='vs:max-laptop:hidden '>{item.tittle}</div>}
     </Link>
   ))}
-
+  
    <button className=" vs:max-laptop:hidden  rounded-full m-4 bg-[#1d9bf0] p-4 text-2xl text-center hover:bg-opacity-70 transition duration-200">
           Tweet
-        </button>
+   </button>
 </div>
 <Profile/>
 </section>
@@ -105,3 +101,69 @@ const LeftSideBar = () => {
 }
 
 export default LeftSideBar
+//         <Twitterlayout>
+          
+//           <div>
+//               <div>
+//           <nav className=" flex items-center gap-3 p-3">
+//             <BsArrowLeftShort className="text-4xl"/>
+//             <div>
+//               <h1  className="text-2xl font-bold">{userData?.firstName}</h1>
+//               <h1 className=" text-xs  text-gray-500 ">{userData?.tweets?.length} Tweets</h1>
+//             </div>
+
+
+//           </nav>
+//         </div>
+
+
+// <div className="container mx-auto p-4">
+// <div className="flex">
+//   <div className="mr-4">
+    
+//     <img
+//       className="w-20 h-20 rounded-full"
+//       src={userData?.profileImageUrl  ?? "https://placekitten.com/200/200"} 
+//       alt="Profile"
+//     />
+//   </div>
+//   <div>
+//     <h2 className="font-bold text-xl">{userData?.firstName}</h2>
+//     <p className="text-gray-500">@{userData?.id}</p>
+//     <p className="text-gray-700">Your bio goes here...</p>
+//     <div className=' flex   mt-1 p-1 gap-1 text-gray-500 '>
+//   <span>{userData?.followers?.length} followers</span>
+//   <span>{userData?.following?.length} following</span>
+
+//     </div>
+//     {
+//       user?.id!=userData?.id&& (<>
+//       {amIFollowing?(<button  onClick={handleFollowerUser} className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Follow</button>):<button  onClick={handleUnFollowUser} className=' bg-[#1d9bf0]   font-serif  text-white font-semibold text-sm py-2 px-4 rounded-full'>Unfollow</button>}
+//       </>)   
+
+//     }
+
+    
+//   </div>
+// </div>
+
+
+
+// <div className="mt-2">
+//   <h3 className="text-xl  mb- font-bold ">Posts</h3>
+ 
+
+
+ 
+ 
+// </div>
+// {userData?.tweets?.map((tweet)=>
+//   <FeedCard key={tweet?.id}  data ={tweet as Tweet}/>
+//   )}
+// </div>
+//         </div>
+
+      
+     
+
+//   </Twitterlayout>
