@@ -13,8 +13,7 @@ import { useQueryClient } from '@tanstack/react-query'
 import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { BsArrowLeftShort } from 'react-icons/bs'
 
-
-const page = ({params,searchParamas}:any) => {
+export default  function Profile({params,searchParamas}:any)  {
   const {user} = userCurrentUser();
   const queryClient = useQueryClient();
   // const data = GetUser(params.id)
@@ -179,4 +178,3 @@ async  function GetUser(id :string){
 
 }
 
-export default page
