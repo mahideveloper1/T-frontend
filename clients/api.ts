@@ -9,7 +9,7 @@ const isClient = typeof window !=="undefined"
 
 //     })
 // });
-export const graphqlClient =new GraphQLClient("http://0.0.0.0:10000/graphql",{
+export const graphqlClient =new GraphQLClient("https://server-twitter-1.onrender.com/graphql",{
     headers: ()=>({
             Authorization: isClient 
          ?`Bearer ${window.localStorage.getItem("token")}`:"",
